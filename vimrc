@@ -3,7 +3,8 @@ let mapleader=","
 set nocompatible
 set viminfo='1000,f1,:1000,/1000
 set history=1000
-
+set lines=35
+set columns=100
 
 "------  Visual Options  ------
 syntax on
@@ -22,7 +23,7 @@ set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:×,eol:¬
 " ,L = Toggle line numbers
 map <Leader>L :set invnumber<CR>
 
-
+colorscheme molokai
 "------  Generic Behavior  ------
 set tabstop=4
 set shiftwidth=4
@@ -157,12 +158,22 @@ let NERDTreeMinimalUI=1
 "------  Tagbar Plugin Options  ------
 " http://adamyoung.net/Exuberant-Ctags-OS-X
 " http://www.vim.org/scripts/script.php?script_id=273
-let g:tagbar_width=26
-noremap <silent> <Leader>y :TagbarToggle<CR>
-
+"let g:tagbar_width=26
+"noremap <silent> <Leader>y :TagbarToggle<CR>
+"let g:tagbar_ctags_bin='/usr/bin/ctags'
 " ,ct = Builds ctags
 "map <Leader>ct :! /usr/local/bin/ctags -R *<CR>
 
+"进行Tlist的设置
+""TlistUpdate可以更新tags
+map <F3> :silent! Tlist<CR> 
+let Tlist_Ctags_Cmd='ctags' "因为我们放在环境变量里，所以可以直接执行
+let Tlist_Use_Right_Window=1 "让窗口显示在右边，0的话就是显示在左边
+let Tlist_Show_One_File=0 "让taglist可以同时展示多个文件的函数列表，如果想只有1个，设置为1
+let Tlist_File_Fold_Auto_Close=1 "非当前文件，函数列表折叠隐藏
+let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时，自动推出vim
+let Tlist_Process_File_Always=0 "是否一直处理tags.1:处理;0:不处理。不是一直实时更新tags，因为没有必要
+let Tlist_Inc_Winwidth=0
 
 "------  Fugitive Plugin Options  ------
 "https://github.com/tpope/vim-fugitive
@@ -213,22 +224,21 @@ map <Leader>P :! php -q %<CR>
 
 au FileType php set omnifunc=phpcomplete#CompletePHP
 
-
 "------  GUI Options  ------
 if has("gui_running")
+
 	" Hides toolbar and scrollbars and File menu
 	set guioptions=egt
 
 	" Highlights the current line background
 	set cursorline
-	colorscheme Tomorrow-Night
+	"colorscheme Tomorrow-Night
 
 	"autocmd VimEnter * TagbarOpen
 
 	"Invisible character colors
 	highlight NonText guifg=#4a4a59
 	highlight SpecialKey guifg=#4a4a59
-
 	if has("gui_macvim") " OS X
 		"set guifont=Monaco:h14
 		set guifont=Monaco:h12
@@ -260,7 +270,7 @@ if has("gui_running")
 		map <silent> <D-9> 9gt
 
 		" OS X probably has ctags in a weird place
-		let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+		let g:tagbar_ctags_bin='/usr/bin/ctags'
 
 	elseif has("gui_gtk2") " Linux
 		set guifont=monospace\ 9
@@ -290,12 +300,48 @@ if has("gui_running")
 	endif
 else
 	set t_Co=256
-	colorscheme Mustang
+	"colorscheme Mustang
 	set mouse=a
 endif
-
 
 "------  Local Overrides  ------
 if filereadable($HOME.'/.vimrc_local')
 	source $HOME/.vimrc_local
 endif
+
+filetype off                  " required!  
+  
+set rtp+=~/.vim/bundle/vundle/  
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'taglist.vim'
+
+filetype plugin indent on
+
+"auto to add } and )
+"inoremap ( ()<ESC>i
+inoremap ( <c-r>=AddBrackets()<CR><ESC>F(a
+inoremap ) <c-r>=ClosePair(')')<CR>
+inoremap { {<CR>}<ESC>kA<CR>
+inoremap } <c-r>=ClosePair('}')<CR>
+inoremap [ []<ESC>i
+inoremap ] <c-r>=ClosePair(']')<CR>
+inoremap < <><ESC>i
+inoremap > <c-r>=ClosePair('>')<CR>
+inoremap ; <c-r>=ClosePair(';')<CR>
+function ClosePair(char)
+	if getline('.')[col('.') - 1] == a:char
+		return "\<Right>"
+	else
+		return a:char
+	endif
+endf
+function AddBrackets()
+	:let l = getline('.')
+	if l[('.') - 1] != " " && stridx(l, ';') == -1
+		return "();"
+	else
+		return "()"
+	endif
+endf
