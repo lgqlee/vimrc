@@ -1,17 +1,26 @@
-# /home/tlhunter/.vim/vimrc
+# /home/lgqlee/.vim/vimrc
 
 ![Screenshot](./screenshot.png "Screenshot of this .vimrc in action")
 
-This Vim configuration is meant to make Vim feel more like an IDE than a simple console-based text editor.
-I use it mostly under with MacVIM and Linux GVim though I occasionally run it directly in a terminal.
+My English is not well, I am sorry……
+
+And this config is base on tlhunter's vimrc,I am sure his vimrc is beautiful and useful.
 
 ## Installation
 
 Run these commands to get this Vim configuration working on your OS X or Linux machine:
 
+This is tlhunter's vimrc, i am sure his is better.
 ```bash
 cd ~
 git clone git://github.com/tlhunter/vimrc.git .vim
+ln -s ~/.vim/vimrc ~/.vimrc
+```
+
+This is mine,thanks again for tlhunter.
+```bash
+cd ~
+git clone git://github.com/lgqlee/vimrc.git .vim
 ln -s ~/.vim/vimrc ~/.vimrc
 ```
 
