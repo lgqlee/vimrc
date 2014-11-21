@@ -5,7 +5,7 @@ set viminfo='1000,f1,:1000,/1000
 set history=1000
 set lines=35
 set columns=100
-
+									
 "------  Visual Options  ------
 syntax on
 set number
@@ -339,7 +339,7 @@ function ClosePair(char)
 endf
 function AddBrackets()
 	:let l = getline('.')
-	if l[('.') - 1] != " " && stridx(l, ';') == -1
+	if l[col('.') - 2] != " " && stridx(l, ';') == -1
 		return "();"
 	else
 		return "()"
