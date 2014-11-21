@@ -61,10 +61,9 @@ ln -s ~/.vim/vimrc ~/.vimrc
 * Use _Cmd w_ (or _Alt w_ in Linux GVim) to close the current tab
 * Use _Cmd 1_ to _Cmd 9_ (or _Alt 1_ to _Alt 9_ in Linux GVim) to navigate to the specified tab
 
-### Tag Browser (Tag List)
+### Taglist
 
-* Use _y_ to toggle the tag browser viewport
-* Use _s_ to reorder the items by alpha or occurance
+* Use _F3_ to toggle taglist
 
 ### Themes (ColorSchemes)
 
