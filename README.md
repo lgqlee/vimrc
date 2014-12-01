@@ -2,22 +2,12 @@
 
 ![Screenshot](./screenshot.png "Screenshot of this .vimrc in action")
 
-My English is not well, I am sorry……
-
-And this config is base on tlhunter's vimrc,I am sure his vimrc is beautiful and useful.
 
 ## Installation
 
 Run these commands to get this Vim configuration working on your OS X or Linux machine:
 
-This is tlhunter's vimrc, i am sure his is better.
-```bash
-cd ~
-git clone git://github.com/tlhunter/vimrc.git .vim
-ln -s ~/.vim/vimrc ~/.vimrc
-```
-
-This is mine,thanks again for tlhunter.
+Get it,Base on tlhunter.
 ```bash
 cd ~
 git clone git://github.com/lgqlee/vimrc.git .vim
