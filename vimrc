@@ -1,11 +1,12 @@
 call pathogen#infect()
 let mapleader=","
+noremap \ ,
 set nocompatible
 set viminfo='1000,f1,:1000,/1000
 set history=1000
 set lines=35
 set columns=100
-									
+set background=dark
 "------  Visual Options  ------
 syntax on
 set number
@@ -24,6 +25,8 @@ set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:×,eol:¬
 map <Leader>L :set invnumber<CR>
 
 colorscheme molokai
+let g:molokai_original = 1
+let g:rehash256 = 1
 "------  Generic Behavior  ------
 set tabstop=4
 set shiftwidth=4
@@ -319,29 +322,8 @@ Bundle 'taglist.vim'
 
 filetype plugin indent on
 
-"auto to add } and )
-"inoremap ( ()<ESC>i
-inoremap ( <c-r>=AddBrackets()<CR><ESC>F(a
-inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap { {<CR>}<ESC>kA<CR>
-inoremap } <c-r>=ClosePair('}')<CR>
-inoremap [ []<ESC>i
-inoremap ] <c-r>=ClosePair(']')<CR>
-inoremap < <><ESC>i
-inoremap > <c-r>=ClosePair('>')<CR>
-inoremap ; <c-r>=ClosePair(';')<CR>
-function ClosePair(char)
-	if getline('.')[col('.') - 1] == a:char
-		return "\<Right>"
-	else
-		return a:char
-	endif
-endf
-function AddBrackets()
-	:let l = getline('.')
-	if l[col('.') - 2] != " " && stridx(l, ';') == -1
-		return "();"
-	else
-		return "()"
-	endif
-endf
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+"add dict
+autocmd FileType javascript set dictionary+=$VIMFILES/bundle/vim-node/dict/node.dict
