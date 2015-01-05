@@ -14,6 +14,11 @@ git clone git://github.com/lgqlee/vimrc.git .vim
 ln -s ~/.vim/vimrc ~/.vimrc
 ```
 
+add vundle if error
+```bash
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+```
+
 ## Features
 
 * Edit many files at the same time
